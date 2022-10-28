@@ -50,14 +50,15 @@ const Auth = () => {
   const toggleAccount = () => setNewAccount((prev) => !prev);
 
   const onSocialClick = async (event) => {
-    const { target: name } = event;
+    const {
+      target: { name },
+    } = event;
 
-    console.log(event.target.name);
     let provider;
     if (name === "google") {
-      // provider = new GoogleAuthProvider();
+      provider = new GoogleAuthProvider();
     } else if (name === "github") {
-      // provider = new GithubAuthProvider();
+      provider = new GithubAuthProvider();
     }
     const data = await signInWithPopup(authService, provider);
     console.log(data);
