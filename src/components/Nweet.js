@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { updateDoc, deleteDoc, doc } from "@firebase/firestore";
 import { dbService } from "fBase";
 
-const Nweet = ({ nweetOBJ: { id, text }, isOwner }) => {
+const Nweet = ({ nweetOBJ: { id, text, attachmentUrl }, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(text);
 
@@ -13,9 +13,7 @@ const Nweet = ({ nweetOBJ: { id, text }, isOwner }) => {
     }
   };
 
-  const toggleEditing = () => {
-    setEditing((prevEditing) => !prevEditing);
-  };
+  const toggleEditing = () => setEditing((prevEditing) => !prevEditing);
 
   const onChange = (e) => {
     const {
@@ -36,25 +34,32 @@ const Nweet = ({ nweetOBJ: { id, text }, isOwner }) => {
     <div>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              placeholder="Edit your nweet"
-              value={newNweet}
-              onChange={onChange}
-              required
-            />
-            <input type="submit" value="Update Nweet" />
-          </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          {isOwner && (
+            <>
+              <form onSubmit={onSubmit}>
+                <input
+                  type="text"
+                  placeholder="Edit your nweet"
+                  value={newNweet}
+                  onChange={onChange}
+                  required
+                />
+                <input type="submit" value="Update Nweet" />
+              </form>
+              <button onClick={toggleEditing}>Cancel</button>
+            </>
+          )}
         </>
       ) : (
-        <h4>{text}</h4>
-      )}
-      {isOwner && (
         <>
-          <button onClick={onClickDelete}>Delete Nweet</button>
-          <button onClick={toggleEditing}>Edit Nweet</button>
+          <h4>{text}</h4>
+          {attachmentUrl && <img src={attachmentUrl} alt="upload file" />}
+          {isOwner && (
+            <>
+              <button onClick={onClickDelete}>Delete Nweet</button>
+              <button onClick={toggleEditing}>Edit Nweet</button>
+            </>
+          )}
         </>
       )}
     </div>
