@@ -73,7 +73,6 @@ const NweetFactory = ({ userObj }) => {
           onChange={onChange}
           value={nweet}
         />
-        {/* <input type="submit" value="Nweet" /> */}
         <input type="submit" value="&rarr;" className="factoryInput__arrow" />
       </div>
       <label htmlFor="attach-file" className="factoryInput__label">

@@ -176,7 +176,8 @@ form {
   border-radius: 10px;
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   color: rgba(0, 0, 0, 0.8);
 }
 

@@ -17,7 +17,6 @@ const AuthForm = () => {
     const {
       target: { name, value },
     } = event;
-    console.log(name, value);
 
     if (name === "email") {
       setEmail(value);
